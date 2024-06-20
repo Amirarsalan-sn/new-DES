@@ -2,38 +2,38 @@
 This project demonstrates a python implementation of a simple block cipher algorithm. The algorithm is designed by me and it is based on Feistel cipher And It encrypts data longer than a single block size in CBC mode. For more information about the design, please read the document below.
 
 ## Design
-The algorithm uses 256 bit block sizes and 128 bit key size, the structure of the encryption algorithm is as follows:
+The algorithm uses 256 bit blocks and 128 bit key, the structure of the algorithm is as follows:
 
 <p align="center">
   <img src="images/Encryption.drawio.png" alt="Encryption structure">
 </p>
 
-As you can see the plain text is first encrypted using play fair cipher with the key showed below:
+As you can see the plain text is first encrypted using playfair cipher with the key showen below:
 
 <p align="center">
   <img src="images/play_fair_1.png" alt="play fair 1">
 </p>
 
-After that it is sliced into blocks and passed throught block ciphers (they are calculated in CBC mode). Then, the results of block encryptions are aggregated and again passed throught another play fair cipher with a different key:
+After that it is sliced into blocks and passed throught block ciphers (they are calculated in CBC mode). Then, the results of block encryptions are aggregated and again passed throught another playfair cipher with a different key:
 
 <p align="center">
   <img src="images/play_fair_1.png" alt="play fair 2">
 </p>
 
-This, was the encryption procedure, for decryption we pretty much do the same but, in the opposite direction:
+This, was the encryption procedure, for decryption we pretty much do the same thing but, in the opposite direction, and instead of playfairs and block ciphers in encryption mode, we use decryption versions of them:
 
 <p align="center">
   <img src="images/Decryption.jpg" alt="decryption structure">
 </p>
 
-In each block cipher, is 16 rounds of feistel network, just like the picture below:
+Each block cipher, contains 16 rounds of feistel network, just like the picture below:
 
 <p align="center">
   <img src="images/Encryption_block.drawio (1).png" alt="block cipher encryption" width="300" height="400">
   <img src="images/Decryption_blcok.jpg" alt="block cipher decryption" width="300" height="400">
 </p>
 
-Again, for the block ciphers used in the decryption, every thing is the same except for the opposite directino of operations.
+Again, for the block ciphers used in the decryption, every thing is the same except in the opposite direction.
 
 In every feistel function (F in the pictures), first, the input data is passed throught an S_box, then, it is XORed with the round key in order to calculate the output of the function:
 
@@ -53,6 +53,7 @@ The S_box is a window of 6 bits long itterating throught the input bit by bit, i
   <img src="images/S_box.drawio.png" alt="S box">
 </p>
 
+The round key creation procedure is simple. The next round key is just the rotation of the current key by one byte to the left.
 ## Result
 A simple test of the algorithm is shown below, you can read the code for detailed structures and algorithms used for this self made block cipher.
 
